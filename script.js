@@ -39,7 +39,7 @@ const colors = [
 let actiWrappers = []; /* An array to store references to the created activity DOM elements so that they can be accessed later when we want to update the text contents. */
     
 function createActivities(period){/* Create the HTML elements and give them the necessary properties */
-    fetch("data.json")
+    fetch("https://github.com/Decimo-10/6.-Time-tracking-dashboard-junior-/blob/main/data.json")
     .then((response) => response.json())
     .then((data) => {
         for(let i = 0; i < data.length; i++){
