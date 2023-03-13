@@ -1,0 +1,196 @@
+@font-face {
+    font-family: "Rubik";
+    src: url(Rubik/Rubik-VariableFont_wght.ttf);
+}
+
+html{
+    font-family: "Rubik", Arial, Helvetica, sans-serif;
+    font-size: 100%;
+}
+
+body{
+    min-width: 250px;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+    background-color: hsl(226, 43%, 10%);
+    font-size: 1.125rem;/* 18px if base is 16px */
+}
+
+footer{
+    color: white;
+}
+
+/* header */
+header{
+    background-color: hsl(235, 46%, 20%);
+    border-radius: 15px;
+}
+.title{/* Container for the picture and texts in the header. */
+    display: grid;
+    padding: 1.75rem 1.5rem;
+    grid-template-columns: 1fr 3fr;
+    gap: 10px;
+    align-items: center;
+    background-color: hsl(246, 80%, 60%);
+    border-radius: 15px;
+
+}
+
+.title > img{/* Profile picture */
+    display: block;
+    max-width: 4rem;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+h1{/* Name */
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: white;
+}
+
+h1 > div:first-child{/* "Report for" */
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: hsl(236, 100%, 87%);
+}
+
+.periods{/* Container for buttons */
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+    background-color: hsl(235, 46%, 20%);
+    border-radius: 15px;
+}
+
+.period{/* Buttons */
+    display: block;
+    color: hsl(236, 100%, 87%);
+    border: none;
+    background: none;
+}
+
+.period:is(:hover, :focus){
+    color: white;
+}
+
+.active{/* Class to apply in JS when a button is clicked */
+    color: white;
+}
+
+.wrapper{/* Extra container around an activity. The colorful top part and icon is implemented with this. */
+    margin-top: 1.5rem;
+    padding-top: 3rem;
+    background-color: hsl(15, 100%, 70%);
+    background-repeat: no-repeat;
+    background-position: top -5px right 20px;
+    border-radius: 15px;
+}
+
+.activity{/* The "actual" container for an activity which contains the informations about it. */
+    display: grid;
+    position: relative;
+    padding: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.5rem 0;
+    align-items: center;
+    background-color: hsl(235, 46%, 20%);
+    border-radius: 15px;
+    color: white;
+}
+.activity:hover::before {/* Put a "layer" on the activity when hovered. */
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: hsl(236, 100%, 87%);
+    opacity: 0.2;
+}
+.activity > *{
+    margin: 0;
+}
+.activity__type{
+    font-size: 1rem;
+    font-weight: 500;
+}
+.activity__more{/* 3 point svg icon */
+    justify-self: flex-end;
+}
+
+.activity__time{/* Current period time */
+    font-size: 2rem;
+    font-weight: 300;
+}
+.activity__last{/* Previous period time */
+    justify-self: flex-end;
+    font-size: 0.9rem;
+    color: hsl(236, 100%, 87%);
+}
+
+
+
+@media (min-width: 850px) {
+    body{
+        max-width: 1000px;
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        gap: 1rem
+    }
+
+    header{
+        display: grid;
+        grid-template-rows: 2fr 1fr;
+    }
+
+    .title{
+        display: block;
+    }
+
+    .periods{
+        padding: 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 0.9rem;
+        
+    }
+
+    .activites{/* A container which contains all the activity wrappers(.wrapper).  */
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .wrapper{
+        margin-top: 0;
+        padding-top: 2.5rem;
+
+    }
+
+    .activity{
+        grid-template-columns: 1fr auto;
+        grid-template-rows: repeat(3, auto);
+    }
+
+    .activity__more{
+        grid-row: span 3;
+        align-self: flex-start;
+    }
+
+    .activity__time{
+        font-size: 2.5rem;
+    }
+
+    .activity__last{
+        justify-self: initial;
+    }
+
+    footer{
+        grid-column: span 4;
+    }
+}
+
