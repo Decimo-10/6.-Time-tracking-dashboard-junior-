@@ -50,7 +50,8 @@ h1{/* Name */
     color: white;
 }
 
-h1 > div:first-child{/* "Report for" */
+h1 > span{/* "Report for" */
+    display: block;
     font-size: 0.9rem;
     font-weight: 300;
     color: hsl(236, 100%, 87%);
