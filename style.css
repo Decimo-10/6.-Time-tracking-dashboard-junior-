@@ -173,7 +173,7 @@ h1 > span{/* "Report for" */
     }
 
     .activity{
-        grid-template-columns: 1fr auto;
+        grid-template-columns: max-content auto;
         grid-template-rows: repeat(3, auto);
     }
 
