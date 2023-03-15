@@ -37,7 +37,7 @@ const colors = [
 const jsonFile = "data.json";
 
 
-let actiWrappers = []; /* An array to store references to the created activity DOM elements so that they can be accessed later when we want to update the text contents. */
+let actiWrappers = []; /* An array to store references to the created activity HTML elements so that they can be accessed later when we want to update the text contents. */
     
 function createActivities(period){/* Create the HTML elements and give them the necessary properties */
     fetch(jsonFile)
@@ -48,7 +48,6 @@ function createActivities(period){/* Create the HTML elements and give them the 
             const wrapper = document.createElement("div");
             const activity = document.createElement("div");
             const type = document.createElement("h2");
-            const more = document.createElement("img");
             const time = document.createElement("p");
             const last = document.createElement("p");
 
@@ -56,7 +55,6 @@ function createActivities(period){/* Create the HTML elements and give them the 
             wrapper.classList.add("wrapper");
             activity.classList.add("activity");
             type.classList.add("activity__type");
-            more.classList.add("activity__more");
             time.classList.add("activity__time");
             last.classList.add("activity__last");
 
@@ -68,11 +66,9 @@ function createActivities(period){/* Create the HTML elements and give them the 
             const imgName = (`icon-${data[i].title.toLowerCase()}.svg`).replace(" ", "-");/* create file name */
             wrapper.style.backgroundImage = `url(images/${imgName})`;
             
-            /* Alt text for svg image. */
-            more.alt = "More";
 
             /* Append the elements */
-            activity.append(type, more, time, last);
+            activity.append(type, createThreePoint(), time, last);
             wrapper.append(activity);
             acitivities.append(wrapper);
             actiWrappers.push(activity);
@@ -88,11 +84,9 @@ function updateText(period){/* Update the text content of the activites */
     .then((data) => {
         for(let i = 0; i < data.length; i++){
             const type = actiWrappers[i].childNodes[0];/* Activity type <h2> */
-            const more = actiWrappers[i].childNodes[1];/* 3 point svg icon <img> */
             const time = actiWrappers[i].childNodes[2];/* current time <p> */
             const last = actiWrappers[i].childNodes[3];/* previous time <p> */
             type.textContent = data[i].title;
-            more.src = "images/icon-ellipsis.svg";
             time.textContent = `${data[i].timeframes[period].current}hrs`;
             switch(period){
                 case "daily":
@@ -129,8 +123,25 @@ function updateText(period){/* Update the text content of the activites */
     .catch(error => console.error(`Could not get data ${error}`));
 }
 
+function createThreePoint(){/* Seperated into it's own function just for clarity's sake. */
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", "21");
+    svg.setAttribute("height", "5");
+    svg.classList.add("activity__more");
+
+    const threePoint = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    threePoint.setAttribute("d","M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z");
+    threePoint.setAttribute("fill", "#BBC0FF");
+    threePoint.setAttribute("fill-rule", "evenodd");
+
+    svg.appendChild(threePoint);
+    return svg;
+}
+
 createActivities("daily");
 
 dailyBtn.addEventListener("click", () => {updateText("daily")});
 weeklyBtn.addEventListener("click", () => {updateText("weekly")});
 monthlyBtn.addEventListener("click", () => {updateText("monthly")});
+
+
